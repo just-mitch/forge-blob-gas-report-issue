@@ -1,66 +1,17 @@
-## Foundry
+# vm.blobhashes issue with --gas-report
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+When using `vm.blobhashes` with `forge test --gas-report`, the test fails with:
 
-Foundry consists of:
+```
+❯ forge test --gas-report
+[⠊] Compiling...
+[⠒] Compiling 1 files with Solc 0.8.26
+[⠑] Solc 0.8.26 finished in 538.57ms
+Compiler run successful!
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+Ran 1 test for test/Counter.t.sol:CounterTest
+[FAIL: EvmError: Revert] setUp() (gas: 0)
+Suite result: FAILED. 0 passed; 1 failed; 0 skipped; finished in 4.79ms (0.00ns CPU time)
 ```
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Bug tracking issue: https://github.com/foundry-rs/foundry/issues/10074
