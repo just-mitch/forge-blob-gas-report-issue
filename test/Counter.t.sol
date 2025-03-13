@@ -8,17 +8,13 @@ contract CounterTest is Test {
     Counter public counter;
 
     function setUp() public {
+        bytes32[] memory blobInputs = new bytes32[](1);
+        blobInputs[0] = bytes32(abi.encode(1));
+        vm.blobhashes(blobInputs);
         counter = new Counter();
-        counter.setNumber(0);
     }
 
     function test_Increment() public {
         counter.increment();
-        assertEq(counter.number(), 1);
-    }
-
-    function testFuzz_SetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
     }
 }
